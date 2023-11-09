@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cimdsuny8kwq2"]
+[gd_scene load_steps=39 format=3 uid="uid://cimdsuny8kwq2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qt1x4"]
 [ext_resource type="Texture2D" uid="uid://bgqqd776lwcnl" path="res://Art/Free/Main Characters/Pink Man/Run (32x32).png" id="2_ix7xs"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://by0v2qdvc08r8" path="res://Art/Free/Main Characters/Pink Man/Fall (32x32).png" id="3_4dyd0"]
 [ext_resource type="Texture2D" uid="uid://cmp3x1asfafa7" path="res://Art/Free/Main Characters/Pink Man/Idle (32x32).png" id="3_qtw0o"]
 [ext_resource type="Texture2D" uid="uid://dumljo0g5tpx3" path="res://Art/Free/Main Characters/Pink Man/Wall Jump (32x32).png" id="5_tbthy"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="7_f0q6h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e6rf0"]
 atlas = ExtResource("2_ix7xs")
@@ -260,6 +261,8 @@ shape = SubResource("RectangleShape2D_6exbp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0.5, 4)
 shape = SubResource("RectangleShape2D_7fesw")
+
+[node name="Health" parent="." instance=ExtResource("7_f0q6h")]
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]

@@ -11,8 +11,12 @@ var direction
 var last_direction
 
 @onready var animation = $AnimatedSprite2D
+@onready var health_bar = $Health
 
 var jump_ready: bool = false
+
+func _ready():
+	health_bar.set_health(health)
 
 func _physics_process(_delta):
 	if is_on_wall():
@@ -24,14 +28,18 @@ func _physics_process(_delta):
 		velocity.y += gravity
 		animation.play("Jump")
 	
-	if is_on_floor():
-		jump_ready = true
-	
 	move()
 	if jump_ready and Input.is_action_just_pressed("jump"):
+		if is_on_wall():
+			velocity.x = -last_direction * (speed * 2)
 		velocity.y = jump_height
 		jump_ready = false
 		animation.play("Jump")
+	
+	if is_on_floor():
+		jump_ready = true
+	else:
+		jump_ready = false
 	
 	move_and_slide()
 
@@ -72,11 +80,14 @@ func hurt(_damage):
 	
 	global_position.x = lerp(global_position.x, new_pos, 0.1)
 	
+	health_bar.change_health(health)
+	
 	if health <= 0:
 		GlobalSignals.emit_signal("player_death")
 
 func set_health():
 	health = 100
+	health_bar.set_health(health)
 
 func _on_hit_box_body_entered(body):
 	#Unstuck the player by moving it up

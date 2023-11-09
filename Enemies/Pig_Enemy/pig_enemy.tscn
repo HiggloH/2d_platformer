@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://trjvtgb4f0ob"]
+[gd_scene load_steps=17 format=3 uid="uid://trjvtgb4f0ob"]
 
 [ext_resource type="Script" path="res://Enemies/Pig_Enemy/pig_enemy.gd" id="1_7wnxj"]
 [ext_resource type="Texture2D" uid="uid://cpdq5jav6jbk6" path="res://Art/Enemies/AngryPig/Idle (36x30).png" id="1_qvywa"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="3_4t78h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ycos"]
 atlas = ExtResource("1_qvywa")
@@ -113,5 +114,11 @@ shape = SubResource("RectangleShape2D_8wqub")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(18, 3)
 shape = SubResource("RectangleShape2D_8wqub")
+
+[node name="Health" parent="." instance=ExtResource("3_4t78h")]
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 3.0
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

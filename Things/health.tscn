@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdpcjp0lak2fs"]
+
+[ext_resource type="Script" path="res://Things/health.gd" id="1_qa7l6"]
+
+[node name="Health" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qa7l6")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+modulate = Color(0.976471, 0, 0.0235294, 1)
+layout_mode = 2
+offset_left = -24.0
+offset_top = -21.0
+offset_right = 216.0
+offset_bottom = 4.0
+scale = Vector2(0.2, 0.2)
+value = 100.0
+show_percentage = false
