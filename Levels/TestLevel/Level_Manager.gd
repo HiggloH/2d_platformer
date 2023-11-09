@@ -8,6 +8,7 @@ func _ready():
 
 func _player_death():
 	$Player.global_position = start_location.global_position
+	$Player.set_health()
 
 func _win():
 	$Player.global_position = start_location.global_position

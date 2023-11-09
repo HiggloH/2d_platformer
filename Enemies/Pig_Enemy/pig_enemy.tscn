@@ -78,7 +78,7 @@ animations = [{
 size = Vector2(33, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81hxs"]
-size = Vector2(29, 5)
+size = Vector2(27, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wqub"]
 size = Vector2(7, 20)
@@ -101,7 +101,7 @@ shape = SubResource("RectangleShape2D_1c7wg")
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0.5, -9.5)
+position = Vector2(0.5, -9)
 shape = SubResource("RectangleShape2D_81hxs")
 
 [node name="Hitbox" type="Area2D" parent="."]

@@ -1,7 +1,14 @@
 extends CharacterBody2D
 
+@onready var sprite = $AnimatedSprite2D
+
 @export var health = 20
 @export var damage = 10
+
+@export var color: Color = Color.WHITE
+
+func _ready():
+	sprite.modulate = color
 
 func hurt(damge):
 	health -= damge

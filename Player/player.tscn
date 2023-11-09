@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://cimdsuny8kwq2"]
+[gd_scene load_steps=38 format=3 uid="uid://cimdsuny8kwq2"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_qt1x4"]
 [ext_resource type="Texture2D" uid="uid://bgqqd776lwcnl" path="res://Art/Free/Main Characters/Pink Man/Run (32x32).png" id="2_ix7xs"]
 [ext_resource type="Texture2D" uid="uid://blow0k6pw25ib" path="res://Art/Free/Main Characters/Pink Man/Jump (32x32).png" id="2_n2sxa"]
 [ext_resource type="Texture2D" uid="uid://by0v2qdvc08r8" path="res://Art/Free/Main Characters/Pink Man/Fall (32x32).png" id="3_4dyd0"]
 [ext_resource type="Texture2D" uid="uid://cmp3x1asfafa7" path="res://Art/Free/Main Characters/Pink Man/Idle (32x32).png" id="3_qtw0o"]
+[ext_resource type="Texture2D" uid="uid://dumljo0g5tpx3" path="res://Art/Free/Main Characters/Pink Man/Wall Jump (32x32).png" id="5_tbthy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e6rf0"]
 atlas = ExtResource("2_ix7xs")
@@ -53,6 +54,26 @@ region = Rect2(320, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvkys"]
 atlas = ExtResource("2_ix7xs")
 region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8s5c"]
+atlas = ExtResource("5_tbthy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn4fr"]
+atlas = ExtResource("5_tbthy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bucig"]
+atlas = ExtResource("5_tbthy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71wmy"]
+atlas = ExtResource("5_tbthy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8gqp"]
+atlas = ExtResource("5_tbthy")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c2y1"]
 atlas = ExtResource("3_qtw0o")
@@ -154,6 +175,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_t8s5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn4fr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bucig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71wmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8gqp")
+}],
+"loop": true,
+"name": &"Wall_Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3c2y1")
 }, {
 "duration": 1.0,
@@ -195,7 +236,7 @@ animations = [{
 size = Vector2(19, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fesw"]
-size = Vector2(21, 24)
+size = Vector2(19, 24)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_qt1x4")
@@ -204,8 +245,7 @@ script = ExtResource("1_qt1x4")
 texture_filter = 1
 position = Vector2(-2.01948e-28, -2.01948e-28)
 sprite_frames = SubResource("SpriteFrames_tbn1q")
-animation = &"Jump"
-frame_progress = 0.105799
+animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -55)
@@ -222,3 +262,4 @@ position = Vector2(0.5, 4)
 shape = SubResource("RectangleShape2D_7fesw")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
