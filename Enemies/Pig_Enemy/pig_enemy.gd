@@ -6,11 +6,20 @@ extends CharacterBody2D
 @export var health = 20
 @export var damage = 10
 
+var gravity: float = 10
+
 @export var color: Color = Color.WHITE
 
 func _ready():
 	sprite.modulate = color
 	health_bar.set_health(health)
+
+func _physics_process(_delta):
+	velocity = Vector2.ZERO
+	
+	velocity.y += gravity
+	
+	move_and_slide()
 
 func hurt(damge):
 	health -= damge

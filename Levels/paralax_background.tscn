@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdsmv1wayx0vn"]
+
+[ext_resource type="Texture2D" uid="uid://1c43hfi14u63" path="res://Art/Free/Background/Blue.png" id="1_22rdm"]
+[ext_resource type="Texture2D" uid="uid://bm3ujllu272g8" path="res://Art/Free/Background/Brown.png" id="2_1n44o"]
+
+[node name="ParalaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(640, 640)
+
+[node name="Blue" type="Sprite2D" parent="ParallaxLayer"]
+texture_filter = 1
+position = Vector2(7.62939e-06, 7.62939e-06)
+scale = Vector2(10, 10)
+texture = ExtResource("1_22rdm")
+centered = false
+
+[node name="Brown" type="Sprite2D" parent="ParallaxLayer"]
+texture_filter = 1
+position = Vector2(160, 480)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_1n44o")
+
+[node name="Brown2" type="Sprite2D" parent="ParallaxLayer"]
+texture_filter = 1
+position = Vector2(480, 159)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_1n44o")

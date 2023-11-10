@@ -7,6 +7,7 @@ var knockback: int = 550
 @export var health = 100
 
 @export var gravity: float = 10
+@export var wall_gravity: float = 50
 var direction
 var last_direction
 
@@ -14,17 +15,19 @@ var last_direction
 @onready var health_bar = $Health
 
 var jump_ready: bool = false
+var ignore_wall: bool = false
 
 func _ready():
 	health_bar.set_health(health)
 
 func _physics_process(_delta):
-	if is_on_wall():
+	if is_on_wall() and not ignore_wall:
+		velocity.y = 0
 		jump_ready = true
 		animation.play("Wall_Jump")
 		
-		velocity.y = 0
-	else:
+		velocity.y += wall_gravity
+	elif not is_on_floor():
 		velocity.y += gravity
 		animation.play("Jump")
 	
@@ -60,12 +63,17 @@ func move():
 		else:
 			animation.play("Run")
 	
-	
-	velocity.x = direction * speed
+	if is_on_wall():
+		velocity.x = last_direction * speed
+	else:
+		velocity.x = direction * speed
 
 func _on_hit_box_area_entered(area: Area2D):
 	if area.is_in_group("Kill_Zone"):
 		GlobalSignals.emit_signal("player_death")
+	
+	if area.is_in_group("Ignore"):
+		ignore_wall = true
 	
 	if area.is_in_group("Enemy_Hitbox"):
 		area.get_parent().hurt(damage)
@@ -95,3 +103,7 @@ func _on_hit_box_body_entered(body):
 		$CollisionShape2D.set_deferred("disabled", true)
 		global_position.y += jump_height / 4
 		$CollisionShape2D.set_deferred("disabled", false)
+
+func _on_hit_box_area_exited(area):
+	if area.is_in_group("Ignore"):
+		ignore_wall = false
