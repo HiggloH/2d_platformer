@@ -71,6 +71,8 @@ func move():
 func _on_hit_box_area_entered(area: Area2D):
 	if area.is_in_group("Kill_Zone"):
 		GlobalSignals.emit_signal("player_death")
+		queue_free()
+		print("player death")
 	
 	if area.is_in_group("Ignore"):
 		ignore_wall = true
@@ -92,6 +94,7 @@ func hurt(_damage):
 	
 	if health <= 0:
 		GlobalSignals.emit_signal("player_death")
+		queue_free()
 
 func set_health():
 	health = 100

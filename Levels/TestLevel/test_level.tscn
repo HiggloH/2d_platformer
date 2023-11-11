@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bcmg3fmwolh2s"]
 
-[ext_resource type="Script" path="res://Levels/TestLevel/Level_Manager.gd" id="1_ifi1g"]
+[ext_resource type="Script" path="res://Levels/Level_Manager.gd" id="1_ifi1g"]
 [ext_resource type="PackedScene" uid="uid://80wr0lsqa5qk" path="res://Levels/Obsticales/kill_zone.tscn" id="3_8fwue"]
 [ext_resource type="TileSet" uid="uid://bdnc6f10838he" path="res://Levels/Level.tres" id="3_pyedc"]
 [ext_resource type="PackedScene" uid="uid://trjvtgb4f0ob" path="res://Enemies/Pig_Enemy/pig_enemy.tscn" id="5_688hj"]

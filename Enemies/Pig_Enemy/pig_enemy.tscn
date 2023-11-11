@@ -84,8 +84,9 @@ size = Vector2(27, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wqub"]
 size = Vector2(7, 20)
 
-[node name="PigEnemy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="PigEnemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy"]]
 script = ExtResource("1_7wnxj")
+hitbox = NodePath("Hitbox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -106,6 +107,8 @@ position = Vector2(0.5, -9)
 shape = SubResource("RectangleShape2D_81hxs")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-17, 3)
@@ -120,5 +123,3 @@ offset_left = 1.0
 offset_top = 3.0
 offset_right = 1.0
 offset_bottom = 3.0
-
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

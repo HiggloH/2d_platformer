@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 GlobalSignals="*res://GlobalScripts/GlobalSignals.gd"
 
+[display]
+
+window/size/resizable=false
+
 [input]
 
 left={

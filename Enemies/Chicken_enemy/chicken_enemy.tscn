@@ -1,0 +1,159 @@
+[gd_scene load_steps=22 format=3 uid="uid://brqoxmitnt8dw"]
+
+[ext_resource type="Texture2D" uid="uid://7y4snb0iamh5" path="res://Art/Enemies/Chicken/Idle (32x34).png" id="1_c0q3e"]
+[ext_resource type="Script" path="res://Enemies/Pig_Enemy/pig_enemy.gd" id="1_u2pq5"]
+[ext_resource type="Script" path="res://Enemies/Chicken_enemy/ChickenAI.gd" id="2_xyg13"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="3_tqq7c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkvml"]
+size = Vector2(29, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvuow"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(0, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpsyh"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(32, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8tue"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(64, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rl82a"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(96, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2csc"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(128, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yfao"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(160, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wavp8"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(192, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jt6w2"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(224, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c46xa"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(256, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s50h1"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(288, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i46y7"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(320, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ys7j1"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(352, 0, 32, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_280wm"]
+atlas = ExtResource("1_c0q3e")
+region = Rect2(384, 0, 32, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lrskk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvuow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpsyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8tue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rl82a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2csc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yfao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wavp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jt6w2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c46xa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s50h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i46y7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ys7j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_280wm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1t157"]
+size = Vector2(19, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8s2sf"]
+size = Vector2(8, 23)
+
+[node name="Chicken_Enemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy"]]
+script = ExtResource("1_u2pq5")
+hitbox = NodePath("HitBox")
+
+[node name="ChickenAI" type="Node2D" parent="." node_paths=PackedStringArray("body", "sprite")]
+script = ExtResource("2_xyg13")
+body = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+
+[node name="RayCast2D" type="RayCast2D" parent="ChickenAI"]
+position = Vector2(0, 11)
+target_position = Vector2(-24, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="ChickenAI"]
+position = Vector2(0, 11)
+target_position = Vector2(-24, 13)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 7)
+shape = SubResource("RectangleShape2D_tkvml")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_lrskk")
+animation = &"idle"
+frame_progress = 0.0168525
+
+[node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-4.5, -12)
+shape = SubResource("RectangleShape2D_1t157")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-14, 5.5)
+shape = SubResource("RectangleShape2D_8s2sf")
+
+[node name="Health" parent="." instance=ExtResource("3_tqq7c")]
