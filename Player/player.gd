@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 @export var speed: int = 200
 @export var jump_height: int = -250
+@export var unstuck_hieght: int = 150
 var damage = 10
-var knockback: int = 550
+var knockback_force: int = 10
+var kockback: bool = false
 @export var health = 100
 
 @export var gravity: float = 10
@@ -13,6 +15,7 @@ var last_direction
 
 @onready var animation = $AnimatedSprite2D
 @onready var health_bar = $Health
+@onready var kockback_timer = $KockbackTimer
 
 var jump_ready: bool = false
 var ignore_wall: bool = false
@@ -30,6 +33,9 @@ func _physics_process(_delta):
 	elif not is_on_floor():
 		velocity.y += gravity
 		animation.play("Jump")
+	
+	if kockback:
+		global_position.x += knockback_force * -last_direction
 	
 	move()
 	if jump_ready and Input.is_action_just_pressed("jump"):
@@ -85,16 +91,15 @@ func _on_hit_box_area_entered(area: Area2D):
 func hurt(_damage):
 	health -= _damage
 	jump_ready = true
-	var knockback_dir = -last_direction
-	var new_pos = global_position.x + (knockback_dir * knockback)
-	
-	global_position.x = lerp(global_position.x, new_pos, 0.1)
 	
 	health_bar.change_health(health)
 	
 	if health <= 0:
 		GlobalSignals.emit_signal("player_death")
 		queue_free()
+	
+	kockback = true
+	kockback_timer.start()
 
 func set_health():
 	health = 100
@@ -104,9 +109,16 @@ func _on_hit_box_body_entered(body):
 	#Unstuck the player by moving it up
 	if body.is_in_group("Level"):
 		$CollisionShape2D.set_deferred("disabled", true)
-		global_position.y += jump_height / 4
+		global_position.y -= unstuck_hieght
 		$CollisionShape2D.set_deferred("disabled", false)
 
 func _on_hit_box_area_exited(area):
 	if area.is_in_group("Ignore"):
 		ignore_wall = false
+
+func _on_kockback_timer_timeout():
+	kockback = false
+
+func _unhandled_input(event):
+	if event.is_action_pressed("reset"):
+		GlobalSignals.emit_signal("player_death")

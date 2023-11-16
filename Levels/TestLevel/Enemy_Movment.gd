@@ -6,3 +6,6 @@ var speed = 1
 
 func _process(_delta):
 	path_follow.progress += speed
+
+func change_dir():
+	speed = -speed

@@ -103,7 +103,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_280wm")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 5.0
 }]
 
@@ -111,11 +111,15 @@ animations = [{
 size = Vector2(19, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s2sf"]
-size = Vector2(8, 23)
+size = Vector2(10, 21)
 
 [node name="Chicken_Enemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_u2pq5")
 hitbox = NodePath("HitBox")
+health = 30
+damage = 20
 
 [node name="ChickenAI" type="Node2D" parent="." node_paths=PackedStringArray("body", "sprite")]
 script = ExtResource("2_xyg13")
@@ -141,8 +145,7 @@ shape = SubResource("RectangleShape2D_tkvml")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lrskk")
-animation = &"idle"
-frame_progress = 0.0168525
+animation = &"Idle"
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox"]]
 
@@ -153,7 +156,7 @@ shape = SubResource("RectangleShape2D_1t157")
 [node name="HitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-14, 5.5)
+position = Vector2(-23, 5.5)
 shape = SubResource("RectangleShape2D_8s2sf")
 
 [node name="Health" parent="." instance=ExtResource("3_tqq7c")]

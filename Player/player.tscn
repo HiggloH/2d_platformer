@@ -237,7 +237,7 @@ animations = [{
 size = Vector2(19, 23)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fesw"]
-size = Vector2(19, 24)
+size = Vector2(19, 23)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_qt1x4")
@@ -257,13 +257,20 @@ position = Vector2(0.5, 4.5)
 shape = SubResource("RectangleShape2D_6exbp")
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(0.5, 4)
+position = Vector2(0.5, 4.5)
 shape = SubResource("RectangleShape2D_7fesw")
 
 [node name="Health" parent="." instance=ExtResource("7_f0q6h")]
 
+[node name="KockbackTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="timeout" from="KockbackTimer" to="." method="_on_kockback_timer_timeout"]

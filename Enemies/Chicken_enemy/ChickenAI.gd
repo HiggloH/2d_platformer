@@ -19,10 +19,12 @@ func _physics_process(_delta):
 			sprite.flip_h = false
 			#24 is the leagth of the raycast
 			raycast.target_position.x = -24
+			ground_cast.target_position.x = -24
 		1:
 			sprite.flip_h = true
 			#24 is the leagth of the raycast
 			raycast.target_position.x = 24
+			ground_cast.target_position.x = 24
 	
 	body.velocity.x = direction * speed
 	

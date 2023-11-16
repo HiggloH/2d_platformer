@@ -71,7 +71,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_tkm0m")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 5.0
 }]
 
@@ -87,14 +87,14 @@ size = Vector2(7, 20)
 [node name="PigEnemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy"]]
 script = ExtResource("1_7wnxj")
 hitbox = NodePath("Hitbox")
+health = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 0.5)
 scale = Vector2(1, 1.03333)
 sprite_frames = SubResource("SpriteFrames_siiks")
-animation = &"idle"
-frame_progress = 0.301727
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 7)
