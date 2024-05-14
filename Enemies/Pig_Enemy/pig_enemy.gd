@@ -11,19 +11,14 @@ extends CharacterBody2D
 
 @export var color: Color = Color.WHITE
 
+var is_moving = false
+
 func _ready():
 	sprite.modulate = color
 	health_bar.set_health(health)
 	
 	hitbox.connect("body_entered", _on_hitbox_body_entered)
 	sprite.play("Idle")
-
-func _physics_process(_delta):
-	velocity = Vector2.ZERO
-	
-	velocity.y += gravity
-	
-	move_and_slide()
 
 func hurt(damge):
 	health -= damge

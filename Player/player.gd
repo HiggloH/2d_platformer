@@ -16,9 +16,11 @@ var last_direction
 @onready var animation = $AnimatedSprite2D
 @onready var health_bar = $Health
 @onready var kockback_timer = $KockbackTimer
+@onready var iFrames_timer = $IFrames
 
 var jump_ready: bool = false
 var ignore_wall: bool = false
+var can_be_hit: bool = true
 
 func _ready():
 	health_bar.set_health(health)
@@ -40,7 +42,7 @@ func _physics_process(_delta):
 	move()
 	if jump_ready and Input.is_action_just_pressed("jump"):
 		if is_on_wall():
-			velocity.x = -last_direction * (speed * 2)
+			velocity.x = -last_direction * (speed * 10)
 		velocity.y = jump_height
 		jump_ready = false
 		animation.play("Jump")
@@ -78,7 +80,6 @@ func _on_hit_box_area_entered(area: Area2D):
 	if area.is_in_group("Kill_Zone"):
 		GlobalSignals.emit_signal("player_death")
 		queue_free()
-		print("player death")
 	
 	if area.is_in_group("Ignore"):
 		ignore_wall = true
@@ -89,17 +90,21 @@ func _on_hit_box_area_entered(area: Area2D):
 		velocity.y = jump_height
 
 func hurt(_damage):
-	health -= _damage
-	jump_ready = true
-	
-	health_bar.change_health(health)
-	
-	if health <= 0:
-		GlobalSignals.emit_signal("player_death")
-		queue_free()
-	
-	kockback = true
-	kockback_timer.start()
+	if can_be_hit:
+		can_be_hit = false
+		
+		health -= _damage
+		jump_ready = true
+		
+		health_bar.change_health(health)
+		
+		if health <= 0:
+			GlobalSignals.emit_signal("player_death")
+			queue_free()
+		
+		kockback = true
+		kockback_timer.start()
+		iFrames_timer.start()
 
 func set_health():
 	health = 100
@@ -122,3 +127,6 @@ func _on_kockback_timer_timeout():
 func _unhandled_input(event):
 	if event.is_action_pressed("reset"):
 		GlobalSignals.emit_signal("player_death")
+
+func _on_i_frames_timeout():
+	can_be_hit = true

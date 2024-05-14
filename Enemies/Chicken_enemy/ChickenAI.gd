@@ -9,22 +9,18 @@ extends Node2D
 @export var speed: int = 100
 #-1 is left and 1 is right
 @export var direction = -1
+@onready var last_direction = direction
 
 func _physics_process(_delta):
 	if raycast.is_colliding() or not ground_cast.is_colliding():
 		direction = -direction
 	
-	match direction:
-		-1:
-			sprite.flip_h = false
-			#24 is the leagth of the raycast
-			raycast.target_position.x = -24
-			ground_cast.target_position.x = -24
-		1:
-			sprite.flip_h = true
-			#24 is the leagth of the raycast
-			raycast.target_position.x = 24
-			ground_cast.target_position.x = 24
+	if direction != last_direction:
+		if direction == -1:
+				body.scale.x = -1
+		else:
+				body.scale.x = -1
+	last_direction = direction
 	
 	body.velocity.x = direction * speed
 	

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://h1cik0a4dw8q"]
+
+[ext_resource type="Script" path="res://Levels/Managers/Levels_Manager.gd" id="1_mw84o"]
+[ext_resource type="PackedScene" uid="uid://dasm81cf0anio" path="res://Levels/Menus/Pause/pause_menu.tscn" id="2_jak05"]
+
+[node name="Level_Manager" type="Node2D"]
+script = ExtResource("1_mw84o")
+
+[node name="Pause" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Pause"]
+
+[node name="PauseMenu" parent="Pause/CanvasLayer" instance=ExtResource("2_jak05")]
+visible = false

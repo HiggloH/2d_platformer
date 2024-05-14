@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjtp7yrt66uo2"]
+[gd_scene load_steps=16 format=3 uid="uid://cjtp7yrt66uo2"]
 
 [ext_resource type="Texture2D" uid="uid://de3n3bmx8bqq1" path="res://Art/Enemies/Bat/Flying (46x30).png" id="1_fov1k"]
 [ext_resource type="Script" path="res://Enemies/Pig_Enemy/pig_enemy.gd" id="1_ht0v5"]
+[ext_resource type="Script" path="res://Enemies/Bat_Enemy/Bat_AI.gd" id="2_fwalb"]
 [ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="3_gtp3f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wcqv"]
@@ -75,6 +76,9 @@ script = ExtResource("1_ht0v5")
 hitbox = NodePath("HitBox")
 health = 15
 gravity = 0.0
+
+[node name="Bat_AI" type="Node2D" parent="."]
+script = ExtResource("2_fwalb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)

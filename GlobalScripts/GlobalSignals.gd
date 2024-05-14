@@ -4,3 +4,5 @@ signal player_death
 signal win
 
 signal checkpoint (new_location)
+
+signal return_to_menu()

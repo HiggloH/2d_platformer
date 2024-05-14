@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://db6ot0hmw34fx"]
+
+[ext_resource type="Script" path="res://Levels/Obsticales/platform.gd" id="1_efju2"]
+[ext_resource type="Texture2D" uid="uid://bbqfn30i14wkq" path="res://Art/Free/Items/Platform_up.png" id="2_ojioj"]
+[ext_resource type="Texture2D" uid="uid://bfssxo1y4olih" path="res://Art/Free/Items/platform_down.png" id="3_h07u7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2boj"]
+size = Vector2(48, 8)
+
+[sub_resource type="Animation" id="Animation_gg8rj"]
+resource_name = "Drop"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("up:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("down:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_27u00"]
+_data = {
+"Drop": SubResource("Animation_gg8rj")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkwxd"]
+size = Vector2(48, 7)
+
+[node name="Platform" type="Node2D"]
+script = ExtResource("1_efju2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_d2boj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_27u00")
+}
+
+[node name="up" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 4)
+texture = ExtResource("2_ojioj")
+
+[node name="down" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(9.23872e-07, -1.19209e-07)
+scale = Vector2(1.04348, 0.5)
+texture = ExtResource("3_h07u7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_qkwxd")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
