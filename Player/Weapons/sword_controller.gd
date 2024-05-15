@@ -13,11 +13,11 @@ var is_attacking = false
 func attack():
 	var tween = create_tween()
 	
-	sword_area.monitoring = true
+	#sword_area.monitoring = true
 	tween.tween_property(sword, "rotation_degrees", sword_rotation_degrees, 0.3)
 	tween.tween_interval(0.2)
 	tween.tween_property(sword, "rotation_degrees", 0, 0.4)
-	sword_area.monitoring = false
+	#sword_area.monitoring = false
 	
 	tween.tween_interval(1)
 	
@@ -34,3 +34,7 @@ func _unhandled_input(event):
 		is_attacking = true
 		
 		attack()
+
+func _on_area_2d_area_entered(area: Area2D):
+	if area.is_in_group("Enemy_Hitbox"):
+		area.get_parent().hurt(damage)

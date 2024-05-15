@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://brqoxmitnt8dw"]
+[gd_scene load_steps=23 format=3 uid="uid://brqoxmitnt8dw"]
 
 [ext_resource type="Texture2D" uid="uid://7y4snb0iamh5" path="res://Art/Enemies/Chicken/Idle (32x34).png" id="1_c0q3e"]
 [ext_resource type="Script" path="res://Enemies/Pig_Enemy/pig_enemy.gd" id="1_u2pq5"]
@@ -110,6 +110,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1t157"]
 size = Vector2(19, 3)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c87n1"]
+size = Vector2(30, 21)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s2sf"]
 size = Vector2(10, 21)
 
@@ -152,6 +155,10 @@ animation = &"Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-4.5, -12)
 shape = SubResource("RectangleShape2D_1t157")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-1, 6.5)
+shape = SubResource("RectangleShape2D_c87n1")
 
 [node name="HitBox" type="Area2D" parent="." groups=["Ignore"]]
 

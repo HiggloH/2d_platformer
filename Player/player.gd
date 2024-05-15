@@ -68,14 +68,13 @@ func move():
 	if has_sword:
 		if direction != last_direction and direction != 0:
 			sword_controller.flip()
-			print("flip")
 	
 	if direction != 0:
 		last_direction = direction
 	
 	if direction == -1:
 		animation.flip_h = true
-		
+	
 		sword_pos.position.x = -8
 	elif direction == 1:
 		animation.flip_h = false
