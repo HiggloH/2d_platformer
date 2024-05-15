@@ -3,8 +3,8 @@ extends Node2D
 @onready var main_menu = preload("res://Menus/Main/main_menu.tscn")
 @onready var game = preload("res://Levels/Managers/Level/level_manager.tscn")
 
-var current_level = 0
-var max_level = 1
+var current_level = 2
+var max_level = 2
 
 func _ready():
 	GlobalSignals.connect("return_to_menu", spawn_menu)

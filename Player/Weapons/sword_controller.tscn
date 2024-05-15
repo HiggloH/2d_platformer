@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxkreefeqb7sb"]
+
+[ext_resource type="Script" path="res://Player/Weapons/sword_controller.gd" id="1_w4ux5"]
+[ext_resource type="Texture2D" uid="uid://bfg83plagow61" path="res://Art/Free/Weapons/weapons.png" id="2_he0pk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_twxvu"]
+radius = 4.0
+height = 16.0
+
+[node name="SwordController" type="Node2D"]
+script = ExtResource("1_w4ux5")
+
+[node name="Sword" type="Node2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="Area2D" type="Area2D" parent="Sword"]
+position = Vector2(0, -8)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_twxvu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword"]
+texture_filter = 1
+position = Vector2(-1.42109e-14, -8)
+scale = Vector2(0.9165, 0.758333)
+texture = ExtResource("2_he0pk")
+region_enabled = true
+region_rect = Rect2(60, 1, 6, 30)

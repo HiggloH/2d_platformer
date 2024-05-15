@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://7y4snb0iamh5" path="res://Art/Enemies/Chicken/Idle (32x34).png" id="1_c0q3e"]
 [ext_resource type="Script" path="res://Enemies/Pig_Enemy/pig_enemy.gd" id="1_u2pq5"]
 [ext_resource type="Script" path="res://Enemies/Chicken_enemy/ChickenAI.gd" id="2_xyg13"]
-[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="3_tqq7c"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Ui/health.tscn" id="4_kwv0y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tkvml"]
 size = Vector2(29, 20)
@@ -159,4 +159,4 @@ shape = SubResource("RectangleShape2D_1t157")
 position = Vector2(-23, 5.5)
 shape = SubResource("RectangleShape2D_8s2sf")
 
-[node name="Health" parent="." instance=ExtResource("3_tqq7c")]
+[node name="Health" parent="." instance=ExtResource("4_kwv0y")]

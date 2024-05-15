@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cdyah6vaww0xi"]
 
-[ext_resource type="Script" path="res://Levels/Managers/Level/level_manager.gd" id="1_mtqct"]
+[ext_resource type="Script" path="res://Levels/Managers/level_manager.gd" id="1_cl2ck"]
 [ext_resource type="TileSet" uid="uid://bdnc6f10838he" path="res://Level.tres" id="1_qvos3"]
 [ext_resource type="PackedScene" uid="uid://cdsmv1wayx0vn" path="res://Levels/Menus/Background/paralax_background.tscn" id="3_bo2le"]
 [ext_resource type="PackedScene" uid="uid://brqoxmitnt8dw" path="res://Enemies/Chicken_enemy/chicken_enemy.tscn" id="4_tgl5a"]
@@ -25,7 +25,7 @@ size = Vector2(160, 64)
 size = Vector2(348.947, 101.243)
 
 [node name="Level_1" type="Node2D"]
-script = ExtResource("1_mtqct")
+script = ExtResource("1_cl2ck")
 
 [node name="Area2D" type="Area2D" parent="." groups=["Ignore"]]
 

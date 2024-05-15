@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://de3n3bmx8bqq1" path="res://Art/Enemies/Bat/Flying (46x30).png" id="1_fov1k"]
 [ext_resource type="Script" path="res://Enemies/Pig_Enemy/pig_enemy.gd" id="1_ht0v5"]
 [ext_resource type="Script" path="res://Enemies/Bat_Enemy/Bat_AI.gd" id="2_fwalb"]
-[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="3_gtp3f"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Ui/health.tscn" id="3_gtp3f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wcqv"]
 size = Vector2(16, 18)

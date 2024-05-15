@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2lrjg3arncom"]
+
+[ext_resource type="Texture2D" uid="uid://bfg83plagow61" path="res://Art/Free/Weapons/weapons.png" id="1_1mn4v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_earac"]
+radius = 8.0
+
+[node name="SwordPickup" type="Area2D" groups=["SwordPickup"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_earac")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1.42109e-14, -4.76837e-07)
+scale = Vector2(0.9165, 0.758333)
+texture = ExtResource("1_1mn4v")
+region_enabled = true
+region_rect = Rect2(60, 1, 6, 30)

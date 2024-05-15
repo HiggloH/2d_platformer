@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/Pig_Enemy/pig_enemy.gd" id="1_7wnxj"]
 [ext_resource type="Texture2D" uid="uid://cpdq5jav6jbk6" path="res://Art/Enemies/AngryPig/Idle (36x30).png" id="1_qvywa"]
-[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="3_4t78h"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Ui/health.tscn" id="3_4t78h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ycos"]
 atlas = ExtResource("1_qvywa")

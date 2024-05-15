@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://by0v2qdvc08r8" path="res://Art/Free/Main Characters/Pink Man/Fall (32x32).png" id="3_4dyd0"]
 [ext_resource type="Texture2D" uid="uid://cmp3x1asfafa7" path="res://Art/Free/Main Characters/Pink Man/Idle (32x32).png" id="3_qtw0o"]
 [ext_resource type="Texture2D" uid="uid://dumljo0g5tpx3" path="res://Art/Free/Main Characters/Pink Man/Wall Jump (32x32).png" id="5_tbthy"]
-[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="7_f0q6h"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Ui/health.tscn" id="7_klsdq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e6rf0"]
 atlas = ExtResource("2_ix7xs")
@@ -265,7 +265,7 @@ collision_mask = 3
 position = Vector2(0.5, 4.5)
 shape = SubResource("RectangleShape2D_7fesw")
 
-[node name="Health" parent="." instance=ExtResource("7_f0q6h")]
+[node name="Health" parent="." instance=ExtResource("7_klsdq")]
 
 [node name="KockbackTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -274,6 +274,9 @@ one_shot = true
 [node name="IFrames" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="SwordPos" type="Marker2D" parent="."]
+position = Vector2(8, 2.08165e-12)
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_exited" from="HitBox" to="." method="_on_hit_box_area_exited"]

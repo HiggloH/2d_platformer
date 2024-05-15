@@ -5,13 +5,11 @@ extends CharacterBody2D
 @onready var health_bar = $Health
 
 @export var health = 0
-@export var damage = 10
+@export var damage = 25
 
 @export var gravity: float = 20
 
 @export var color: Color = Color.WHITE
-
-var is_moving = false
 
 func _ready():
 	sprite.modulate = color

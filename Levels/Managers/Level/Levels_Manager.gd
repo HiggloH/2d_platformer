@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var level_0 = preload("res://Levels/Level0-10/tutorial_level.tscn")
 @onready var level_1 = preload("res://Levels/Level0-10/level_1.tscn")
+@onready var level_2 = preload("res://Levels/Level0-10/level_2.tscn")
 
 var levels: Array
 #The first level has the index zero in the level array
@@ -21,6 +22,7 @@ func _ready():
 	
 	levels.append(level_0)
 	levels.append(level_1)
+	levels.append(level_2)
 	
 	max_level = levels.size()
 	

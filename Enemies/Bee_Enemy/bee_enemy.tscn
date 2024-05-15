@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://8nth2ffvw3bw" path="res://Art/Enemies/Bee/Attack (36x34).png" id="1_fuuhv"]
 [ext_resource type="Script" path="res://Enemies/Bee_Enemy/bee_enemy.gd" id="1_pdx85"]
 [ext_resource type="Texture2D" uid="uid://cow3268vuw355" path="res://Art/Enemies/Bee/Idle (36x34).png" id="2_x2ebb"]
-[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Things/health.tscn" id="4_cx0h5"]
+[ext_resource type="PackedScene" uid="uid://bdpcjp0lak2fs" path="res://Ui/health.tscn" id="4_cx0h5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11p5c"]
 size = Vector2(16, 24)

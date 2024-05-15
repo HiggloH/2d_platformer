@@ -1,11 +1,19 @@
 extends CharacterBody2D
 
+#Sword variables
+@onready var sword_controller: Node2D = preload("res://Player/Weapons/sword_controller.tscn").instantiate()
+@onready var sword_pos: Marker2D = $SwordPos
+
+var has_sword = false
+
 @export var speed: int = 200
 @export var jump_height: int = -250
 @export var unstuck_hieght: int = 150
+
 var damage = 10
 var knockback_force: int = 10
 var kockback: bool = false
+
 @export var health = 100
 
 @export var gravity: float = 10
@@ -57,13 +65,22 @@ func _physics_process(_delta):
 func move():
 	direction = Input.get_axis("left", "right")
 	
+	if has_sword:
+		if direction != last_direction and direction != 0:
+			sword_controller.flip()
+			print("flip")
+	
 	if direction != 0:
 		last_direction = direction
 	
 	if direction == -1:
 		animation.flip_h = true
+		
+		sword_pos.position.x = -8
 	elif direction == 1:
 		animation.flip_h = false
+		
+		sword_pos.position.x = 8
 	
 	if is_on_floor():
 		if direction == 0:
@@ -80,6 +97,10 @@ func _on_hit_box_area_entered(area: Area2D):
 	if area.is_in_group("Kill_Zone"):
 		GlobalSignals.emit_signal("player_death")
 		queue_free()
+	
+	if area.is_in_group("SwordPickup"):
+		area.queue_free()
+		pickup_sword()
 	
 	if area.is_in_group("Ignore"):
 		ignore_wall = true
@@ -110,9 +131,12 @@ func set_health():
 	health = 100
 	health_bar.set_health(health)
 
+func pickup_sword():
+	sword_pos.call_deferred("add_child", sword_controller)
+	has_sword = true
+
 func _on_hit_box_body_entered(body):
 	if body.is_in_group("Ignore"):
-		print("test")
 		ignore_wall = true
 	
 	#Unstuck the player by moving it up
