@@ -50,10 +50,16 @@ func _player_death():
 	move_child(get_child(1), 0)
 
 func _win():
-	get_child(0).queue_free()
+	while get_child_count() > 1:
+		get_child(0).queue_free()
+		
+		await get_tree().create_timer(0.1).timeout
+	
 	if current_level >= max_level:
 		current_level += 1
 	
 	var new_level = levels[current_level].instantiate()
+	
 	call_deferred("add_child", new_level)
+	await get_tree().create_timer(0.3).timeout
 	move_child(get_child(1), 0)
