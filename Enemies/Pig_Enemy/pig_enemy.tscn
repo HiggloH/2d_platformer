@@ -84,7 +84,7 @@ size = Vector2(27, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wqub"]
 size = Vector2(7, 20)
 
-[node name="PigEnemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy"]]
+[node name="PigEnemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy", "Ignore"]]
 script = ExtResource("1_7wnxj")
 hitbox = NodePath("Hitbox")
 health = 10
@@ -100,13 +100,13 @@ animation = &"Idle"
 position = Vector2(0.5, 7)
 shape = SubResource("RectangleShape2D_1c7wg")
 
-[node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox"]]
+[node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox", "Ignore"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0.5, -9)
 shape = SubResource("RectangleShape2D_81hxs")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." groups=["Ignore"]]
 collision_layer = 3
 collision_mask = 3
 

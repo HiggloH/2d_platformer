@@ -26,7 +26,7 @@ func _ready():
 	health_bar.set_health(health)
 
 func _physics_process(_delta):
-	if is_on_wall() and not ignore_wall:
+	if is_on_wall_only() and not ignore_wall and !jump_ready:
 		velocity.y = 0
 		jump_ready = true
 		animation.play("Wall_Jump")
@@ -41,8 +41,8 @@ func _physics_process(_delta):
 	
 	move()
 	if jump_ready and Input.is_action_just_pressed("jump"):
-		if is_on_wall():
-			velocity.x = -last_direction * (speed * 10)
+		if is_on_wall_only():
+			velocity.x = -last_direction * (speed * 5)
 		velocity.y = jump_height
 		jump_ready = false
 		animation.play("Jump")
@@ -111,11 +111,19 @@ func set_health():
 	health_bar.set_health(health)
 
 func _on_hit_box_body_entered(body):
+	if body.is_in_group("Ignore"):
+		print("test")
+		ignore_wall = true
+	
 	#Unstuck the player by moving it up
 	if body.is_in_group("Level"):
 		$CollisionShape2D.set_deferred("disabled", true)
 		global_position.y -= unstuck_hieght
 		$CollisionShape2D.set_deferred("disabled", false)
+
+func _on_hit_box_body_exited(body):
+	if body.is_in_group("Ignore"):
+		ignore_wall = false
 
 func _on_hit_box_area_exited(area):
 	if area.is_in_group("Ignore"):

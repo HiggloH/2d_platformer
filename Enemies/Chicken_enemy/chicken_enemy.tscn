@@ -113,7 +113,7 @@ size = Vector2(19, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8s2sf"]
 size = Vector2(10, 21)
 
-[node name="Chicken_Enemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy"]]
+[node name="Chicken_Enemy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Enemy", "Ignore"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_u2pq5")
@@ -147,13 +147,13 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_lrskk")
 animation = &"Idle"
 
-[node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox"]]
+[node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox", "Ignore"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-4.5, -12)
 shape = SubResource("RectangleShape2D_1t157")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." groups=["Ignore"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-23, 5.5)

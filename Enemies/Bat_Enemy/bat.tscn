@@ -71,7 +71,7 @@ size = Vector2(32, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wubim"]
 size = Vector2(46, 17)
 
-[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("hitbox")]
+[node name="Bat" type="CharacterBody2D" node_paths=PackedStringArray("hitbox") groups=["Ignore"]]
 script = ExtResource("1_ht0v5")
 hitbox = NodePath("HitBox")
 health = 15
@@ -89,13 +89,13 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_j302t")
 animation = &"Idle"
 
-[node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox"]]
+[node name="HurtBox" type="Area2D" parent="." groups=["Enemy_Hitbox", "Ignore"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_3j7pa")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." groups=["Ignore"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, 3.5)

@@ -15,7 +15,7 @@
 size = Vector2(87.5, 230.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4txx"]
-size = Vector2(132, 83)
+size = Vector2(132, 12.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y06lc"]
 size = Vector2(18, 26)
@@ -64,6 +64,7 @@ scale = Vector2(0.625, 0.8125)
 texture = ExtResource("5_tinpi")
 
 [node name="Control" type="Control" parent="Sign_1"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = -142.0
@@ -104,6 +105,7 @@ scale = Vector2(0.625, 0.8125)
 texture = ExtResource("5_tinpi")
 
 [node name="Control" type="Control" parent="Sign_2"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = -142.0
@@ -144,6 +146,7 @@ scale = Vector2(0.625, 0.8125)
 texture = ExtResource("5_tinpi")
 
 [node name="Control" type="Control" parent="Sign_3"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = -142.0
@@ -184,6 +187,7 @@ scale = Vector2(0.625, 0.8125)
 texture = ExtResource("5_tinpi")
 
 [node name="Control" type="Control" parent="Sign_4"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_top = -142.0
