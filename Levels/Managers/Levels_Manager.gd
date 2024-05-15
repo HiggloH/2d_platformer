@@ -50,6 +50,8 @@ func _player_death():
 	move_child(get_child(1), 0)
 
 func _win():
+	start_location = Vector2.ZERO
+	
 	while get_child_count() > 1:
 		get_child(0).queue_free()
 		
