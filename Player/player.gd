@@ -17,6 +17,8 @@ var kockback: bool = false
 @export var health = 100
 
 @export var gravity: float = 10
+var max_velocity = Vector2(0, 900)
+
 @export var wall_gravity: float = 50
 var direction
 var last_direction
@@ -41,7 +43,8 @@ func _physics_process(_delta):
 		
 		velocity.y += wall_gravity
 	elif not is_on_floor():
-		velocity.y += gravity
+		if velocity.y <= max_velocity.y:
+			velocity.y += gravity
 		animation.play("Jump")
 	
 	if kockback:

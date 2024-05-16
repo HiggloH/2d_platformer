@@ -35,6 +35,9 @@ position = Vector2(616, 144)
 [node name="KillZone3" parent="Obsticales/KillZones" instance=ExtResource("3_l5k27")]
 position = Vector2(1623, 146)
 
+[node name="KillZone4" parent="Obsticales/KillZones" instance=ExtResource("3_l5k27")]
+position = Vector2(2696, 146)
+
 [node name="Platfroms" type="Node2D" parent="Obsticales"]
 
 [node name="Platform" parent="Obsticales/Platfroms" instance=ExtResource("4_nri66")]
@@ -81,5 +84,5 @@ region_enabled = true
 region_rect = Rect2(393, 105, 42, 8)
 
 [node name="SwordPickup" parent="Boss" instance=ExtResource("3_x364v")]
-position = Vector2(2824, 45)
+position = Vector2(2584, 48)
 rotation = 1.57079
