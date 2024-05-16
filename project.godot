@@ -23,6 +23,10 @@ GlobalSignals="*res://GlobalScripts/GlobalSignals.gd"
 
 window/stretch/mode="viewport"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 left={

@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_twxvu"]
 radius = 4.0
-height = 20.0
+height = 24.0
 
 [node name="SwordController" type="Node2D"]
 script = ExtResource("1_w4ux5")
@@ -22,8 +22,8 @@ shape = SubResource("CapsuleShape2D_twxvu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword"]
 texture_filter = 1
-position = Vector2(-1.42109e-14, -8)
-scale = Vector2(0.9165, 0.758333)
+position = Vector2(1.69407e-21, -8)
+scale = Vector2(0.9165, 1.04583)
 texture = ExtResource("2_he0pk")
 region_enabled = true
 region_rect = Rect2(60, 1, 6, 30)

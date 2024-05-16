@@ -13,13 +13,11 @@ var is_attacking = false
 func attack():
 	var tween = create_tween()
 	
-	#sword_area.monitoring = true
-	tween.tween_property(sword, "rotation_degrees", sword_rotation_degrees, 0.3)
+	tween.tween_property(sword, "rotation_degrees", sword_rotation_degrees, 0.1)
 	tween.tween_interval(0.2)
-	tween.tween_property(sword, "rotation_degrees", 0, 0.4)
-	#sword_area.monitoring = false
+	tween.tween_property(sword, "rotation_degrees", 0, 0.2)
 	
-	tween.tween_interval(1)
+	tween.tween_interval(0.5)
 	
 	await tween.finished
 	is_attacking = false

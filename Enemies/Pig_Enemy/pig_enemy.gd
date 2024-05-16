@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var health_bar = $Health
 
 @export var health = 0
-@export var damage = 25
+@export var damage = 10
 
 @export var gravity: float = 20
 
@@ -18,8 +18,8 @@ func _ready():
 	hitbox.connect("body_entered", _on_hitbox_body_entered)
 	sprite.play("Idle")
 
-func hurt(damge):
-	health -= damge
+func hurt(_damge):
+	health -= _damge
 	
 	health_bar.change_health(health)
 	if health <= 0:

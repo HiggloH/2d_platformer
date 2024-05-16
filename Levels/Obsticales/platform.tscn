@@ -53,7 +53,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qkwxd"]
-size = Vector2(48, 7)
+size = Vector2(50, 11)
 
 [node name="Platform" type="Node2D"]
 script = ExtResource("1_efju2")
@@ -80,10 +80,10 @@ position = Vector2(9.23872e-07, -1.19209e-07)
 scale = Vector2(1.04348, 0.5)
 texture = ExtResource("3_h07u7")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Ignore"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -2.5)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_qkwxd")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
