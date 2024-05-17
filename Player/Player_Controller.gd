@@ -13,7 +13,7 @@ enum States {
 	WallJumping
 }
 
-@export var move_speed: int = 20000
+@export var move_speed: int = 15500
 @export var jump_height: int = -22500
 var max_jump_velocity: int = -375
 
