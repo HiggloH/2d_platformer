@@ -23,6 +23,7 @@ var max_velocity = Vector2(0, 900)
 var direction
 var last_direction
 
+#Barn references
 @onready var animation = $AnimatedSprite2D
 @onready var health_bar = $Health
 @onready var kockback_timer = $KockbackTimer

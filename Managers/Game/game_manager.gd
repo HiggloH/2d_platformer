@@ -1,9 +1,10 @@
 extends Node2D
 
 @onready var main_menu = preload("res://Menus/Main/main_menu.tscn")
+@onready var level_select_menu = preload("res://Menus/Level Select/level_select.tscn")
 @onready var game = preload("res://Levels/Managers/Level/level_manager.tscn")
 
-var current_level = 0
+@export var current_level = 0
 var max_level = 2
 
 func _ready():
@@ -17,7 +18,7 @@ func win():
 		current_level += 1
 
 func spawn_menu():
-	if get_children()  != []:
+	if get_children() != []:
 		for child in get_children():
 			child.queue_free()
 	
@@ -35,5 +36,10 @@ func start_game():
 	add_child(new_game)
 
 func level_select():
-	print("Level select")
+	if get_children() != []:
+		for child in get_children():
+			child.queue_free()
+	
+	var new_menu = level_select_menu.instantiate()
+	call_deferred("add_child", new_menu)
 

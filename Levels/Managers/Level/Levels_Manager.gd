@@ -59,7 +59,7 @@ func _win():
 		
 		await get_tree().create_timer(0.1).timeout
 	
-	if current_level >= max_level:
+	if current_level <= max_level:
 		current_level += 1
 	
 	var new_level = levels[current_level].instantiate()

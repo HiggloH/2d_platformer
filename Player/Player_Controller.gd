@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 const GRAVITY: float = 1200.0
-const WALL_GRAVITY: float = 550.0
+const WALL_GRAVITY: float = 250.0
 const MAX_VELOCITY: Vector2 = Vector2(0, 10000)
+const MAX_WALL_VELOCITY: Vector2 = Vector2(0, 500)
 
 @onready var sword_controller: Node2D = preload("res://Player/Weapons/sword_controller.tscn").instantiate()
 
@@ -10,24 +11,34 @@ enum States {
 	Idle,
 	Jumping,
 	Falling,
-	WallJumping
+	WallJumping,
+	Knockback
 }
 
 @export var move_speed: int = 15500
-@export var jump_height: int = -22500
+@export var jump_height: int = -15000
 var max_jump_velocity: int = -375
 
 var move_direction: float = 0
 var last_direction: float = 0 
 
+@export var health: int = 100
+var damage: int = 10
+
 var current_state: States = States.Idle 
 
+#Barn referencer
 @onready var sprite_anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var i_frame: Timer = $IFrames
+@onready var knockback_timer: Timer = $KockbackTimer
+@onready var health_bar: Control = $Health
 @onready var sword_pos: Marker2D = $SwordPos
 
 var has_sword: bool = false
 
 var jump_ready: bool = false
+var can_hurt: bool = true
+var ignore_wall: bool = false
 
 func instansiate(_has_sword: bool):
 	has_sword = _has_sword
@@ -35,35 +46,51 @@ func instansiate(_has_sword: bool):
 	if has_sword:
 		pickup_sword()
 
+func _ready():
+	health_bar.set_health(health)
+
 func change_state(new_state: States):
+	#velocity = Vector2.ZERO
+	
 	current_state = new_state
 
 func _physics_process(delta):
 	if not is_on_floor():
-		if current_state != States.Jumping:
-			change_state(States.Falling)
-		
-		if velocity.y <= MAX_VELOCITY.y:
-			velocity.y += GRAVITY * delta
+		if current_state != States.Falling:
+			if current_state != States.Jumping and current_state != States.WallJumping:
+				change_state(States.Falling)
 	
-	if is_on_floor():
+	if !ignore_wall:
+		if is_on_wall() and current_state == States.Falling and current_state != States.WallJumping:
+			velocity.y = 0
+			
+			change_state(States.WallJumping)
+		
 		jump_ready = true
-	else:
-		jump_ready = false
 	
 	animate()
-	Move(delta)
+	
+	if current_state != States.WallJumping:
+		Move(delta)
 	
 	match current_state:
 		States.Idle:
-			pass
+			if is_on_floor():
+				jump_ready = true
+			else:
+				jump_ready = false
 		States.Jumping:
 			if jump_ready:
 				jump(delta)
 			
 		States.Falling:
+			if velocity.y <= MAX_VELOCITY.y:
+				velocity.y += GRAVITY * delta
+			
 			if is_on_floor():
 				change_state(States.Idle)
+		States.WallJumping:
+			wall_jump(delta)
 	
 	move_and_slide()
 
@@ -73,16 +100,18 @@ func animate():
 		sprite_anim.flip_h = false
 		
 		#move the sword pos the follow the sprite flip
-		sword_pos.global_position.x = 8
+		sword_pos.position.x = 8
 	elif move_direction == -1:
 		#Flip the sprite left
 		sprite_anim.flip_h = true
 		
 		#move the sword pos the follow the sprite flip
-		sword_pos.global_position.x = -8
+		sword_pos.position.x = -8
 	
 	if current_state == States.Falling:
 		sprite_anim.play("Falling")
+	elif current_state == States.WallJumping:
+		sprite_anim.play("Wall_Jump")
 	
 	#Play the idle or move animation depending on if you move or not
 	if is_on_floor():
@@ -91,9 +120,13 @@ func animate():
 		else:
 			sprite_anim.play("Run")
 
+func wall_jump(delta: float):
+	if velocity.y < MAX_WALL_VELOCITY.y:
+		velocity.y += WALL_GRAVITY * delta
+
 func jump(delta: float):
 	if is_on_wall_only():
-		velocity.x = -last_direction * (move_speed * 5) * delta
+		velocity.x = -last_direction * (move_speed * 10) * delta
 	sprite_anim.play("Jump")
 	velocity.y = jump_height * delta
 	
@@ -101,8 +134,28 @@ func jump(delta: float):
 	await get_tree().create_timer(0.25).timeout
 	change_state(States.Falling)
 
+func hurt(_damage):
+	if can_hurt:
+		can_hurt = false
+		
+		health -= _damage
+		jump_ready = true
+		
+		health_bar.change_health(health)
+		
+		if health <= 0:
+			GlobalSignals.emit_signal("player_death")
+			queue_free()
+		
+		i_frame.start()
+		knockback_timer.start()
+
 func Move(delta: float):
 	move_direction = Input.get_axis("left", "right")
+	
+	if has_sword:
+		if move_direction != last_direction and move_direction != 0:
+			sword_controller.flip()
 	
 	if move_direction != 0:
 		last_direction = move_direction
@@ -114,7 +167,7 @@ func pickup_sword():
 	has_sword = true
 
 func _unhandled_input(event):
-	if event.is_action_pressed("jump") and jump_ready:
+	if event.is_action_pressed("jump") and jump_ready and current_state != States.Falling:
 		change_state(States.Jumping)
 
 func _on_hit_box_area_entered(area: Area2D):
@@ -125,9 +178,23 @@ func _on_hit_box_area_entered(area: Area2D):
 	if area.is_in_group("SwordPickup") and !has_sword:
 		area.queue_free()
 		pickup_sword()
+	
+	if area.is_in_group("Ignore"):
+		ignore_wall = true
+	
+	if area.is_in_group("Enemy_Hitbox"):
+		area.get_parent().hurt(damage)
+		
+		change_state(States.Jumping)
 
-func _on_hit_box_area_exited(_area):
-	pass # Replace with function body.
+func _on_hit_box_area_exited(area: Area2D):
+	if area.is_in_group("Ignore"):
+		ignore_wall = false
 
-func _on_hit_box_body_entered(_body):
-	pass # Replace with function body.
+func _on_hit_box_body_entered(body):
+	if body.is_in_group("Ignore"):
+		ignore_wall = true
+
+func _on_hit_box_body_exited(body):
+	if body.is_in_group("Ignore"):
+		ignore_wall = false

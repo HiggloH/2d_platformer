@@ -84,5 +84,5 @@ region_enabled = true
 region_rect = Rect2(393, 105, 42, 8)
 
 [node name="SwordPickup" parent="Boss" instance=ExtResource("3_x364v")]
-position = Vector2(2584, 48)
+position = Vector2(208, 27)
 rotation = 1.57079
