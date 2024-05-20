@@ -62,6 +62,11 @@ func _win():
 	if current_level <= max_level:
 		current_level += 1
 	
+	if Game.unlocked_levels[current_level]:
+		pass
+	else:
+		Game.unlocked_levels[current_level] = true
+	
 	var new_level = levels[current_level].instantiate()
 	
 	call_deferred("add_child", new_level)

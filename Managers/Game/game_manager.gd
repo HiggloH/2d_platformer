@@ -8,10 +8,17 @@ extends Node2D
 var max_level = 2
 
 func _ready():
+	GlobalSignals.connect("change_level", change_level)
 	GlobalSignals.connect("return_to_menu", spawn_menu)
 	GlobalSignals.connect("win", win)
 	
 	spawn_menu()
+
+func change_level(level: int):
+	if level <= max_level:
+		current_level = level
+	
+	start_game()
 
 func win():
 	if current_level < max_level:
