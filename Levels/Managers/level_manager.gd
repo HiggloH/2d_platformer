@@ -11,8 +11,6 @@ func _ready():
 	
 	player.global_position = start_location.global_position
 	call_deferred("add_child", player)
-	
-	player.instansiate(Game.has_sword)
 
 func set_start_location(new_position):
 	new_location = new_position

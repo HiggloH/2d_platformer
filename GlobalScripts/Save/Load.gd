@@ -7,5 +7,13 @@ func load():
 	
 	if save_file != null:
 		var unlocked_levels = save_file.get_line()
+		var has_sword = save_file.get_line()
+		
+		#Convert has_sword from string to bool
+		if has_sword == "false":
+			has_sword = false
+		elif has_sword == "true":
+			has_sword = true
 		
 		Game.unlocked_levels = unlocked_levels
+		Game.has_sword = has_sword

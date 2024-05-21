@@ -41,14 +41,11 @@ var jump_ready: bool = false
 var can_hurt: bool = true
 var ignore_wall: bool = false
 
-func instansiate(_has_sword: bool):
-	has_sword = _has_sword
-	
-	if has_sword:
-		pickup_sword()
-
 func _ready():
 	health_bar.set_health(health)
+	
+	if Game.has_sword:
+		pickup_sword()
 
 func change_state(new_state: States):
 	if new_state == States.WallJumping:
@@ -58,18 +55,19 @@ func change_state(new_state: States):
 	current_state = new_state
 
 func _physics_process(delta):
-	if not is_on_floor():
+	if not is_on_floor() and not is_on_wall():
 		if current_state != States.Falling:
 			if current_state != States.Jumping and current_state != States.WallJumping:
 				change_state(States.Falling)
 	
 	if !ignore_wall:
-		if is_on_wall() and current_state == States.Falling and current_state != States.WallJumping:
+		if is_on_wall() and current_state == States.Falling:
 			velocity.y = 0
 			
-			change_state(States.WallJumping)
+			if current_state != States.WallJumping:
+				change_state(States.WallJumping)
 		
-		jump_ready = true
+			jump_ready = true
 	
 	animate()
 	
@@ -85,7 +83,6 @@ func _physics_process(delta):
 		States.Jumping:
 			if jump_ready:
 				jump(delta)
-			
 		States.Falling:
 			if velocity.y <= MAX_VELOCITY.y:
 				velocity.y += GRAVITY * delta
@@ -101,13 +98,13 @@ func animate():
 	if move_direction == 1:
 		#Flip the sprite right
 		sprite_anim.flip_h = false
-		
+			
 		#move the sword pos the follow the sprite flip
 		sword_pos.position.x = 8
 	elif move_direction == -1:
 		#Flip the sprite left
 		sprite_anim.flip_h = true
-		
+			
 		#move the sword pos the follow the sprite flip
 		sword_pos.position.x = -8
 	
@@ -157,7 +154,7 @@ func Move(delta: float):
 	move_direction = Input.get_axis("left", "right")
 	
 	if has_sword:
-		if move_direction != last_direction and move_direction != 0:
+		if move_direction != last_direction and move_direction != 0 and last_direction != 0:
 			sword_controller.flip()
 	
 	if move_direction != 0:
@@ -179,6 +176,8 @@ func _on_hit_box_area_entered(area: Area2D):
 		queue_free()
 	
 	if area.is_in_group("SwordPickup") and !has_sword:
+		Game.has_sword = true
+		
 		area.queue_free()
 		pickup_sword()
 	
