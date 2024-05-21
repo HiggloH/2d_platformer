@@ -8,6 +8,8 @@ extends Node2D
 var max_level = 2
 
 func _ready():
+	Load.load()
+	
 	GlobalSignals.connect("change_level", change_level)
 	GlobalSignals.connect("return_to_menu", spawn_menu)
 	GlobalSignals.connect("win", win)

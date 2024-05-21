@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 const GRAVITY: float = 1200.0
 const WALL_GRAVITY: float = 250.0
-const MAX_VELOCITY: Vector2 = Vector2(0, 10000)
-const MAX_WALL_VELOCITY: Vector2 = Vector2(0, 500)
+const MAX_VELOCITY: Vector2 = Vector2(0, 1000)
+const MAX_WALL_VELOCITY: Vector2 = Vector2(0, 350)
 
 @onready var sword_controller: Node2D = preload("res://Player/Weapons/sword_controller.tscn").instantiate()
 
@@ -26,6 +26,7 @@ var last_direction: float = 0
 var damage: int = 10
 
 var current_state: States = States.Idle 
+var last_state: States
 
 #Barn referencer
 @onready var sprite_anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -50,8 +51,10 @@ func _ready():
 	health_bar.set_health(health)
 
 func change_state(new_state: States):
-	#velocity = Vector2.ZERO
+	if new_state == States.WallJumping:
+		velocity.x = 0
 	
+	last_state = current_state
 	current_state = new_state
 
 func _physics_process(delta):
@@ -108,7 +111,7 @@ func animate():
 		#move the sword pos the follow the sprite flip
 		sword_pos.position.x = -8
 	
-	if current_state == States.Falling:
+	if current_state == States.Falling and last_state != States.WallJumping:
 		sprite_anim.play("Falling")
 	elif current_state == States.WallJumping:
 		sprite_anim.play("Wall_Jump")
@@ -126,7 +129,7 @@ func wall_jump(delta: float):
 
 func jump(delta: float):
 	if is_on_wall_only():
-		velocity.x = -last_direction * (move_speed * 10) * delta
+		velocity.x = -last_direction * (move_speed * 5) * delta
 	sprite_anim.play("Jump")
 	velocity.y = jump_height * delta
 	
@@ -185,6 +188,7 @@ func _on_hit_box_area_entered(area: Area2D):
 	if area.is_in_group("Enemy_Hitbox"):
 		area.get_parent().hurt(damage)
 		
+		#Lauch player up after bounsing on ememy
 		change_state(States.Jumping)
 
 func _on_hit_box_area_exited(area: Area2D):

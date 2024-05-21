@@ -55,6 +55,16 @@ theme_override_fonts/font = ExtResource("1_lygsp")
 theme_override_font_sizes/font_size = 37
 text = "Level 1"
 
+[node name="Level2" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 288.0
+offset_right = 287.0
+offset_bottom = 341.0
+theme_override_fonts/font = ExtResource("1_lygsp")
+theme_override_font_sizes/font_size = 37
+text = "Level 2"
+
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 5
@@ -75,6 +85,13 @@ position = Vector2(312, 232)
 scale = Vector2(2, 2)
 texture = ExtResource("3_gqmf0")
 
+[node name="Lock2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(312, 312)
+scale = Vector2(2, 2)
+texture = ExtResource("3_gqmf0")
+
 [connection signal="button_down" from="CanvasLayer/Control/Return" to="." method="_on_return_button_down"]
 [connection signal="button_down" from="CanvasLayer/Control/Tutorial" to="." method="_on_tutorial_button_down"]
 [connection signal="button_down" from="CanvasLayer/Control/Level1" to="." method="_on_level_1_button_down"]
+[connection signal="button_down" from="CanvasLayer/Control/Level2" to="." method="_on_level_2_button_down"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bajx5uf2ledwq"]
+[gd_scene load_steps=10 format=3 uid="uid://bajx5uf2ledwq"]
 
 [ext_resource type="Script" path="res://Levels/Managers/level_manager.gd" id="1_7xpga"]
 [ext_resource type="TileSet" uid="uid://bdnc6f10838he" path="res://Level.tres" id="2_7l4yf"]
+[ext_resource type="PackedScene" uid="uid://cdsmv1wayx0vn" path="res://paralax_background.tscn" id="2_fedp7"]
 [ext_resource type="PackedScene" uid="uid://80wr0lsqa5qk" path="res://Levels/Obsticales/kill_zone.tscn" id="3_l5k27"]
 [ext_resource type="PackedScene" uid="uid://b2lrjg3arncom" path="res://Player/Weapons/Sword.tscn" id="3_x364v"]
 [ext_resource type="PackedScene" uid="uid://db6ot0hmw34fx" path="res://Levels/Obsticales/platform.tscn" id="4_nri66"]
@@ -13,6 +14,8 @@ size = Vector2(23, 98.25)
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_7xpga")
+
+[node name="ParalaxBackground" parent="." instance=ExtResource("2_fedp7")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_7l4yf")
@@ -84,5 +87,5 @@ region_enabled = true
 region_rect = Rect2(393, 105, 42, 8)
 
 [node name="SwordPickup" parent="Boss" instance=ExtResource("3_x364v")]
-position = Vector2(208, 27)
+position = Vector2(2600, 48)
 rotation = 1.57079

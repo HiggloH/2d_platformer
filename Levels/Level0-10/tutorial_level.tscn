@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/Managers/level_manager.gd" id="1_cofhg"]
 [ext_resource type="TileSet" uid="uid://bdnc6f10838he" path="res://Level.tres" id="2_7vxh4"]
-[ext_resource type="PackedScene" uid="uid://cdsmv1wayx0vn" path="res://Levels/Menus/Background/paralax_background.tscn" id="3_1ns52"]
+[ext_resource type="PackedScene" uid="uid://cdsmv1wayx0vn" path="res://paralax_background.tscn" id="3_1ns52"]
 [ext_resource type="PackedScene" uid="uid://trjvtgb4f0ob" path="res://Enemies/Pig_Enemy/pig_enemy.tscn" id="4_vq4mt"]
 [ext_resource type="Script" path="res://Levels/Level0-10/sign.gd" id="5_drk6o"]
 [ext_resource type="Texture2D" uid="uid://bsi3br8xkpxde" path="res://Art/Free/Items/Sign.png" id="5_tinpi"]

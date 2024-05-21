@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 GlobalSignals="*res://GlobalScripts/GlobalSignals.gd"
 Game="*res://GlobalScripts/Game.gd"
+Load="*res://GlobalScripts/Save/Load.gd"
+Save="*res://GlobalScripts/Save/Save.gd"
 
 [display]
 
