@@ -188,6 +188,7 @@ func _on_hit_box_area_entered(area: Area2D):
 		area.get_parent().hurt(damage)
 		
 		#Lauch player up after bounsing on ememy
+		jump_ready = true
 		change_state(States.Jumping)
 
 func _on_hit_box_area_exited(area: Area2D):
