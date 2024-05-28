@@ -313,3 +313,15 @@ shape = SubResource("RectangleShape2D_xd3gj")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Attack2_Area"]
 position = Vector2(35, -12)
 shape = SubResource("RectangleShape2D_2q0p0")
+
+[node name="PlayerDetection" type="Node2D" parent="."]
+
+[node name="Left" type="RayCast2D" parent="PlayerDetection"]
+position = Vector2(-2.08165e-12, 24)
+target_position = Vector2(-40, -2.08165e-12)
+collision_mask = 4
+
+[node name="Right" type="RayCast2D" parent="PlayerDetection"]
+position = Vector2(0, 24)
+target_position = Vector2(40, 0)
+collision_mask = 4

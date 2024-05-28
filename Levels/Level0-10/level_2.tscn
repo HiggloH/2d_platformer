@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://db6ot0hmw34fx" path="res://Levels/Obsticales/platform.tscn" id="4_nri66"]
 [ext_resource type="PackedScene" uid="uid://btjflqqwdwkkg" path="res://Levels/Obsticales/check_point.tscn" id="5_le0i4"]
 [ext_resource type="Texture2D" uid="uid://cfhkeuytw82nc" path="res://Art/Enemies/Skeleton enemy/Skeleton enemy.png" id="6_ns31u"]
-[ext_resource type="Script" path="res://Levels/Level0-10/Boss/Boss_Manager.gd" id="7_0s16x"]
+[ext_resource type="Script" path="res://Levels/Level0-10/Boss/Skeleton_boss_manager.gd" id="7_lh4ey"]
 [ext_resource type="PackedScene" uid="uid://dq15y26r3qvj7" path="res://Enemies/Boss/Skeleton/skeleton_boss.tscn" id="9_atnr1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovpge"]
@@ -144,20 +144,21 @@ shape = SubResource("RectangleShape2D_ovpge")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Boss" type="Node2D" parent="."]
-script = ExtResource("7_0s16x")
+script = ExtResource("7_lh4ey")
 
 [node name="Skeleton" type="Node2D" parent="Boss"]
 
 [node name="SkeletonEnemy" type="Sprite2D" parent="Boss/Skeleton"]
 texture_filter = 1
-position = Vector2(2869, 45)
+position = Vector2(2876, 43)
+scale = Vector2(2, 1.75)
 texture = ExtResource("6_ns31u")
 region_enabled = true
 region_rect = Rect2(393, 105, 42, 8)
 
 [node name="SkeletonBoss" parent="Boss/Skeleton" instance=ExtResource("9_atnr1")]
 visible = false
-position = Vector2(2873, 32)
+position = Vector2(2873, 15)
 
 [node name="SwordPickup" parent="Boss" instance=ExtResource("3_x364v")]
 position = Vector2(2600, 48)

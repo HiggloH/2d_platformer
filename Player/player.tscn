@@ -249,7 +249,7 @@ size = Vector2(19, 23)
 size = Vector2(19, 23)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_layer = 3
+collision_layer = 7
 script = ExtResource("1_qcrjm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
