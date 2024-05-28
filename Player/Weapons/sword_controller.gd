@@ -35,4 +35,7 @@ func _unhandled_input(event):
 
 func _on_area_2d_area_entered(area: Area2D):
 	if area.is_in_group("Enemy_Hitbox"):
-		area.get_parent().hurt(damage)
+		if area.get_parent().has_method("Hurt"):
+			area.get_parent().hurt(damage)
+		else:
+			print("Area does not have a hurt function")

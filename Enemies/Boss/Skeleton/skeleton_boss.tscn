@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dq15y26r3qvj7"]
+[gd_scene load_steps=43 format=3 uid="uid://dq15y26r3qvj7"]
 
 [ext_resource type="Texture2D" uid="uid://cfhkeuytw82nc" path="res://Art/Enemies/Skeleton enemy/Skeleton enemy.png" id="1_5r115"]
 [ext_resource type="Script" path="res://Enemies/Boss/Skeleton/skeleton_boss.gd" id="1_86ecf"]
@@ -269,6 +269,10 @@ size = Vector2(54, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q0p0"]
 size = Vector2(41, 42)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1hri2"]
+radius = 24.0
+height = 64.0
+
 [node name="SkeletonBoss" type="CharacterBody2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 script = ExtResource("1_86ecf")
@@ -325,3 +329,8 @@ collision_mask = 4
 position = Vector2(0, 24)
 target_position = Vector2(40, 0)
 collision_mask = 4
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Enemy_Hitbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_1hri2")

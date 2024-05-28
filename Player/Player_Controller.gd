@@ -25,8 +25,7 @@ var last_direction: float = 0
 @export var health: int = 100
 var damage: int = 10
 
-var current_state: States = States.Idle 
-var last_state: States
+var current_state: States = States.Idle
 
 #Barn referencer
 @onready var sprite_anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -51,13 +50,12 @@ func change_state(new_state: States):
 	if new_state == States.WallJumping:
 		velocity.x = 0
 	
-	last_state = current_state
 	current_state = new_state
 
 func _physics_process(delta):
 	if not is_on_floor() and not is_on_wall():
 		if current_state != States.Falling:
-			if current_state != States.Jumping and current_state != States.WallJumping:
+			if current_state != States.Jumping or current_state == States.WallJumping:
 				change_state(States.Falling)
 	
 	if !ignore_wall:
@@ -108,7 +106,7 @@ func animate():
 		#move the sword pos the follow the sprite flip
 		sword_pos.position.x = -8
 	
-	if current_state == States.Falling and last_state != States.WallJumping:
+	if current_state == States.Falling:
 		sprite_anim.play("Falling")
 	elif current_state == States.WallJumping:
 		sprite_anim.play("Wall_Jump")
@@ -185,7 +183,10 @@ func _on_hit_box_area_entered(area: Area2D):
 		ignore_wall = true
 	
 	if area.is_in_group("Enemy_Hitbox"):
-		area.get_parent().hurt(damage)
+		if area.get_parent().hurt(damage):
+			area.get_parent().hurt(damage)
+		else:
+			print("Area does not have a hurt function")
 		
 		#Lauch player up after bounsing on ememy
 		jump_ready = true

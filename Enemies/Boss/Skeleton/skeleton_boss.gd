@@ -25,6 +25,7 @@ var direction: Vector2 = Vector2.ZERO
 var player_direction: int = 0
 
 var move_speed: int = 15000
+var health: int = 350
 
 func change_state(new_state: States):
 	velocity = Vector2.ZERO
@@ -77,7 +78,7 @@ func Retrite(delta: float):
 		change_state(States.Idle)
 
 func attack(delta: float):
-	#Move to the player
+	#Choose attack and move close to the player
 	pass
 
 func attack_2():
@@ -85,3 +86,10 @@ func attack_2():
 
 func attack_1():
 	attack_area_1.monitorable = true
+
+func hurt(hurt_damage: int):
+	health -= hurt_damage
+	print(health)
+	
+	if health <= 0:
+		queue_free()

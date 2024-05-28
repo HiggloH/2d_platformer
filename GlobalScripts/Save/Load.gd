@@ -2,7 +2,7 @@ extends Node
 
 const SAVE_FILE_1 = "user://save_file_1.json"
 
-func load():
+func load_save_file():
 	var save_file = FileAccess.open(SAVE_FILE_1, FileAccess.READ)
 	
 	if save_file != null:
