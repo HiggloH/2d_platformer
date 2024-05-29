@@ -189,7 +189,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Attack2",
-"speed": 1.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -282,9 +282,8 @@ texture_filter = 1
 position = Vector2(-3, 1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_838ej")
-animation = &"Attack2"
-frame = 4
-frame_progress = 0.422207
+animation = &"idle"
+frame_progress = 0.703745
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -334,3 +333,10 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CapsuleShape2D_1hri2")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

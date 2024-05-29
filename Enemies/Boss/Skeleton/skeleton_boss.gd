@@ -6,15 +6,14 @@ enum States {
 	Idle,
 	Run,
 	Retrite,
-	Attack,
-	Attack1,
-	Attack2
+	Attack
 }
 
 var current_state: States
 
 @onready var attack_area_1 = $Attack1_Area
 @onready var attack_area_2 = $Attack2_Area
+@onready var attack_timer = $AttackTimer
 
 @onready var player_retite_detection_left = $PlayerDetection/Left
 @onready var player_retite_detection_right = $PlayerDetection/Right
@@ -33,6 +32,9 @@ func change_state(new_state: States):
 	attack_area_1.monitorable = false
 	attack_area_2.monitorable = false
 	
+	if current_state == States.Attack:
+		attack_timer.start()
+	
 	current_state = new_state
 
 func start():
@@ -47,8 +49,10 @@ func _physics_process(delta):
 			Idle()
 		States.Retrite:
 			Retrite(delta)
+		States.Attack:
+			attack(delta)
 	
-	if current_state != States.Retrite:
+	if current_state != States.Retrite and current_state != States.Attack:
 		if player_retite_detection_left.is_colliding() or player_retite_detection_right.is_colliding():
 			change_state(States.Retrite)
 	
@@ -79,13 +83,29 @@ func Retrite(delta: float):
 
 func attack(delta: float):
 	#Choose attack and move close to the player
-	pass
+	var c_attack = randi_range(0, 1)
+	
+	if not player_retite_detection_left.is_colliding() or not player_retite_detection_right.is_colliding():
+		velocity.x = player_direction * move_speed * delta
+	else:
+		if c_attack == 0:
+			attack_1()
+		elif c_attack == 1:
+			attack_2()
 
 func attack_2():
+	anim_player.play("Attack2")
 	attack_area_2.monitorable = true
+	
+	await anim_player.animation_finished
+	change_state(States.Idle)
 
 func attack_1():
+	anim_player.play("Attack1")
 	attack_area_1.monitorable = true
+	
+	await anim_player.animation_finished
+	change_state(States.Idle)
 
 func hurt(hurt_damage: int):
 	health -= hurt_damage
@@ -93,3 +113,6 @@ func hurt(hurt_damage: int):
 	
 	if health <= 0:
 		queue_free()
+
+func _on_attack_timer_timeout():
+	change_state(States.Attack)
